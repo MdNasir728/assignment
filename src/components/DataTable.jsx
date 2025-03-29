@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, FunnelPlus } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
@@ -17,7 +16,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+
 import {
   Table,
   TableBody,
@@ -27,58 +26,20 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
-// import { Label } from "@/components/ui/label"
 import { loanData } from '../Data'
-// const data = [
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//     name: "Ken",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//     name: "Klarf",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//     name: "Klaf",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//     name: "Kluaf",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     amount: 242,
-//     status: "success",
-//     email: "Abe45@example.com",
-//     name: "Abe",
-//   },
 
-// ]
-
-
-
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 export const columns = [
   {
     id: "select",
@@ -276,7 +237,7 @@ export const columns = [
   // },
 ]
 
-export function DataTable() {
+export function DataTable({ activeTab }) {
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState(
     []
@@ -321,36 +282,50 @@ export function DataTable() {
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
-          
-          <Dialog>
-            <DialogTrigger asChild>
-            <Button variant="outline" className=" bg-blue-500 text-white">
-              More Filters <FunnelPlus />
-            </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Upload Document</DialogTitle>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Input id="name" placeholder='document name' className="col-span-3" />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className=" bg-blue-500 text-white">
+                More Filters <FunnelPlus />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Upload Document</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-4 p-6">
+                <div className="flex  flex-col gap-2">
+                  <Label htmlFor="name" className="text-right">
+                    Document Name
+                  </Label>
+                  <Input id="name" className="col-span-3" />
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Input id="username" placeholder='document type' className="col-span-3" />
+                <div className="flex  flex-col gap-2">
+                  <Label htmlFor="username" className="text-right">
+                    Document Type
+                  </Label>
+                  <Input id="username" className="col-span-3" />
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Input id="username" placeholder='document remarks' className="col-span-3" />
+                <div className="flex  flex-col gap-2">
+                  <Label htmlFor="username" className="text-right">
+                    Document Remarks
+                  </Label>
+                  <Input id="username" className="col-span-3" />
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Input type='file' id="username" placeholder='select document' className="col-span-3" />
+                <div className="flex  flex-col gap-2">
+                  <Label htmlFor="username" className="text-right">
+                    Document Type
+                  </Label>
+                  <Input type='file' id="username" className="col-span-3" />
                 </div>
               </div>
-              <DialogFooter>
-                <Button type="submit" className='bg-blue-600' onClick={()=>alert('Uploaded successfully')}>Submit</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button type="submit" className='bg-blue-600' onClick={() => alert('Uploaded successfully')}>Submit</Button>
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
@@ -372,6 +347,26 @@ export function DataTable() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {activeTab == 'Pre Sarfaesi' && <div className="rounded-md border p-2 flex gap-4 my-1.5 items-center">
+        <Button
+          type="submit"
+          className='bg-blue-600'
+          onClick={() => alert('Pre Sarfaisi Notice Generated')}
+          disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+        >
+          Generate Pre Sarfaisi Notice({table.getFilteredSelectedRowModel().rows.length})
+        </Button>
+        <Button
+          type="submit"
+          className='bg-blue-600'
+          onClick={() => alert('NPA declared')}
+          disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+        >
+          Declare NPA({table.getFilteredSelectedRowModel().rows.length})
+        </Button>
+        <p>{table.getFilteredSelectedRowModel().rows.length} Loan selected</p>
+      </div>}
+
       <div className="rounded-md border">
         <Table>
           <TableHeader>

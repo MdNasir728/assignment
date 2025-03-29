@@ -25,7 +25,7 @@ const Hero = ({ activeLink }) => {
           ))}
         </TabsList>
       </Tabs>
-      <DataTable />
+      <DataTable  activeTab={activeTab}/>
 
 
     </div>
