@@ -85,8 +85,8 @@ export function DropdownMenuComp({ setActiveLink, activeLink }) {
                         </div>
                     ))
                 }
-                <div className='absolute bottom-0 w-full p-[16px] border-t border-gray-200'>
-                    <p>Powered by resollect</p>
+                <div className='absolute bottom-0 flex items-center gap-[4px] p-[6px] mb-3 hover:bg-gray-100 cursor-pointer'>
+                    Powered by <span className='rounded-full bg-blue-400 p-[1px] w-[20px] flex items-center justify-center text-white font-extrabold mr-[1px] '>r</span>esollect
                 </div>
             </DropdownMenuContent>
         </DropdownMenu>

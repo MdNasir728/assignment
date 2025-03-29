@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs'
-import { DataTable } from './DataTable'
+import { DataTableWrapper } from './DataTableWrapper'
 
 
 
@@ -14,6 +14,7 @@ const Hero = ({ activeLink }) => {
   return (
     <div className='w-full h-full p-6'>
       <h1 className='font-bold text-3xl mb-4' >{activeLink}</h1>
+      {/* topbar tabs */}
       <Tabs defaultValue="All" className="w-full my-4" >
         <TabsList className=' bg-white'>
           {tabList.map((tab) => (
@@ -25,7 +26,8 @@ const Hero = ({ activeLink }) => {
           ))}
         </TabsList>
       </Tabs>
-      <DataTable  activeTab={activeTab}/>
+      {/* table content */}
+      <DataTableWrapper  activeTab={activeTab}/>
 
 
     </div>

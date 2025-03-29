@@ -58,7 +58,7 @@ export const SideNavbar = ({ setActiveLink, activeLink }) => {
         navbarItems.map((item, index) => (
           <div
             key={index}
-            className={`${activeLink == item.name? 'bg-blue-500' : ''} rounded-md flex items-center gap-[4px] p-[16px] hover:bg-gray-100 cursor-pointer`}
+            className={`${activeLink == item.name ? 'bg-blue-500' : ''} rounded-md flex items-center gap-[4px] p-[16px] hover:bg-gray-100 cursor-pointer`}
             onClick={() => setActiveLink(item.name)}>
             <span className='text-blue-400'>{item.icon}</span>
             <span className='text-sm font-medium'>{item.name}</span>
@@ -66,8 +66,8 @@ export const SideNavbar = ({ setActiveLink, activeLink }) => {
         ))
       }
 
-      <div className='absolute bottom-0 w-full p-[16px] border-t border-gray-200'>
-        <p>Powered by resollect</p>
+      <div className='absolute bottom-0 flex items-center gap-[4px] p-[6px] mb-3 hover:bg-gray-100 cursor-pointer'>
+        Powered by <span className='rounded-full bg-blue-400 p-[1px] w-[20px] flex items-center justify-center text-white font-extrabold mr-[1px] '>r</span>esollect
       </div>
     </div>
   )
